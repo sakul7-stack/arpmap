@@ -20,5 +20,5 @@ ARPMap is a Python utility to scan your local network using the ARP table, list 
 1. Clone or download the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/sakul7-stack/arpmap.git
 cd arpmap
