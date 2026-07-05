@@ -24,7 +24,7 @@ from typing import Any
 
 DEFAULT_DB_FILE = "arpmap_db.json"
 
-RECORD_FIELDS = ("name", "vendor", "last_ip", "first_seen", "last_seen")
+RECORD_FIELDS = ("name", "hostname", "vendor", "last_ip", "first_seen", "last_seen")
 
 
 def _blank_record() -> dict[str, Any]:
@@ -81,13 +81,14 @@ def touch(
     *,
     ip: str | None = None,
     vendor: str | None = None,
+    hostname: str | None = None,
     timestamp: str | None = None,
 ) -> dict[str, Any]:
-    """Update first/last-seen (and optionally ip/vendor) for ``mac``.
+    """Update first/last-seen (and optionally ip/vendor/hostname) for ``mac``.
 
-    Returns the record. ``first_seen`` is only set once; ``last_seen`` and
-    ``last_ip`` are refreshed each call. ``vendor`` is only filled if not already
-    known, so a cached online lookup is never overwritten by a blank.
+    Returns the record. ``first_seen`` is only set once; ``last_seen``, ``last_ip``
+    and ``hostname`` are refreshed each call. ``vendor`` is only filled if not
+    already known, so a cached online lookup is never overwritten by a blank.
     """
     stamp = timestamp or now_iso()
     record = record_for(db, mac)
@@ -98,6 +99,8 @@ def touch(
         record["last_ip"] = ip
     if vendor and not record.get("vendor"):
         record["vendor"] = vendor
+    if hostname:
+        record["hostname"] = hostname
     return record
 
 

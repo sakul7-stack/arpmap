@@ -16,6 +16,7 @@ _COLUMNS: tuple[tuple[str, str], ...] = (
     ("IP", "ip"),
     ("MAC", "mac"),
     ("Name", "name"),
+    ("Hostname", "hostname"),
     ("Vendor", "vendor"),
     ("First seen", "first_seen"),
     ("Last seen", "last_seen"),

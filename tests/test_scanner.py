@@ -48,7 +48,7 @@ def test_export_csv_and_json(monkeypatch):
     rows = scanner.scan({})
 
     csv_text = export.export(rows, "csv")
-    assert "mac,ip,name,vendor,first_seen,last_seen" in csv_text
+    assert "mac,ip,name,hostname,vendor,first_seen,last_seen" in csv_text
     assert "b8:27:eb:fd:de:48" in csv_text
 
     json_text = export.export(rows, "json")

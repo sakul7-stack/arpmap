@@ -1,0 +1,43 @@
+# ---- ARPMap runtime data ----
+arpmap_db.json
+*.jsonl                # watch event logs (e.g. events.jsonl)
+devices.csv
+devices.json
+*.export.csv
+*.export.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+wheels/
+pip-wheel-metadata/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Testing / coverage ----
+.pytest_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db

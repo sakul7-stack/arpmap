@@ -10,7 +10,7 @@ from typing import Sequence
 
 from arpmap.scanner import ScanRow
 
-_FIELDS = ("mac", "ip", "name", "vendor", "first_seen", "last_seen")
+_FIELDS = ("mac", "ip", "name", "hostname", "vendor", "first_seen", "last_seen")
 
 
 def to_csv(rows: Sequence[ScanRow]) -> str:

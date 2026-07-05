@@ -19,21 +19,34 @@ Requires Python 3.9+.
 ```bash
 arpmap scan                    # list devices on your network
 arpmap scan --sweep            # ping the subnet first to find more
+arpmap scan --resolve          # also look up hostnames (reverse DNS)
 arpmap list                    # show saved devices (no scan)
 arpmap name 192.168.1.10 nas   # give a device a name
+arpmap ports 192.168.1.10      # scan a device's TCP ports
+arpmap stats                   # summary: counts and top vendors
 arpmap watch                   # alert when devices join or leave
+arpmap watch --log events.jsonl   # ...and record every event to a file
 arpmap export --format csv -o devices.csv
 ```
 
-Run `arpmap` with no command to scan. Add `--help` to any command for options.
+Run `arpmap` with no command to scan. Add `--json` to `scan`, `list`, `ports`, or
+`stats` for machine-readable output. Add `--help` to any command for options.
 
 ## Example
 
 ```
-#   IP             MAC                Name    Vendor
---  -------------  -----------------  ------  ------------------------
-0   192.168.1.1    d8:4a:2b:3e:16:f0  router  Zyxel Communications
-1   192.168.1.10   b8:27:eb:fd:de:48  nas     Raspberry Pi Foundation
+#   IP             MAC                Name    Hostname   Vendor
+--  -------------  -----------------  ------  ---------  ------------------------
+0   192.168.1.1    d8:4a:2b:3e:16:f0  router  router     Zyxel Communications
+1   192.168.1.10   b8:27:eb:fd:de:48  nas     nas.lan    Raspberry Pi Foundation
+```
+
+```
+$ arpmap ports 192.168.1.10
+Open ports on 192.168.1.10:
+      22  ssh
+     445  smb
+    5000  upnp/http
 ```
 
 ## How it works
@@ -50,8 +63,11 @@ pings.
 | Option | Description |
 | --- | --- |
 | `--sweep` | Ping the subnet before scanning (`scan`, `watch`, `export --scan`). |
+| `--resolve` | Reverse-DNS resolve hostnames (`scan`, `watch`). |
 | `--online` | Look up unknown vendors online. |
 | `--all` | Include public / non-private IPs. |
+| `--json` | Machine-readable output (`scan`, `list`, `ports`, `stats`). |
+| `--log FILE` | Append watch events to a JSON-lines file (`watch`). |
 | `--db PATH` | Use a different database file. |
 | `--plain` | Plain text tables (no colors). |
 
