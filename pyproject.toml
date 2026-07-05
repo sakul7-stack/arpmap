@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arpmap"
+version = "0.2.0"
+description = "Discover, name, and track devices on your local network via ARP."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["arp", "network", "scanner", "lan", "inventory"]
+dependencies = []
+
+[project.optional-dependencies]
+rich = ["rich>=13.0"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+arpmap = "arpmap.cli:main"
+
+[tool.setuptools]
+packages = ["arpmap"]
+
+[tool.setuptools.package-data]
+arpmap = ["data/*.csv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
